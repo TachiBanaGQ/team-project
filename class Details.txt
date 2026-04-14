@@ -1,0 +1,11 @@
+Dillvin Neverson 
+1536942
+
+Controls wsad/arrow keys or gamepad dpad > Movement
+Space bar or gamepad south button > jump
+
+the physics approach?
+the physics approach i went with was a more standard mario bros physic.
+I went for a more weighted feeling for the jump so it can land back better and faster.
+using coyatetime to make the landing feel responsive helps.
+the ground detection i went with is the circle one since originally i did the cube one but my character kept spinning like a thumbleweed 
