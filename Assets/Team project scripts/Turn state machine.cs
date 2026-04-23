@@ -7,20 +7,20 @@ public enum BattleState {START, PLAYERTURN, ENEMYTURN, WON, LOST}
 
 public class Turnstatemachine : MonoBehaviour
 {
-    public GameObject playerPrefab;
-    public GameObject enemyPrefab;
+    [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private GameObject enemyPrefab;
 
-    public Transform playerCoordinate;
-    public Transform enemyCoordinate;
+    [SerializeField] private Transform playerCoordinate;
+    [SerializeField] private Transform enemyCoordinate;
 
-    public HpHud playerHUD;
-    public HpHud enemyHUD;
+    [SerializeField] private HpHud playerHUD;
+    [SerializeField] private HpHud enemyHUD;
 
 
     Unit playerUnit;
     Unit enemyUnit;
 
-    public Text dialogueText;
+    [SerializeField] private Text dialogueText;
 
    public BattleState state;
 
