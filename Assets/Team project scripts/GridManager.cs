@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -10,6 +11,8 @@ public class GridManager : MonoBehaviour
     [SerializeField] private Tile tilePrefab;
     [SerializeField] private Transform cam;
 
+    private Dictionary<Vector2, Tile> tiles;
+
     private void Start()
     {
         GenerateGrid();
@@ -17,21 +20,33 @@ public class GridManager : MonoBehaviour
 
     void GenerateGrid()
     {
+        tiles = new Dictionary<Vector2, Tile>();
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
                 var spawnedTile = Instantiate(tilePrefab, new Vector3(x, y, 0), Quaternion.identity);
-                spawnedTile.name = $"Tile {x} {y}";
+                spawnedTile.name = $"Tile {x},{y}";
 
                 //Offset the colours
                 var isOffset = (x % 2 == 0 && y % 2 != 0) || (x % 2 != 0 && y % 2 ==0);
-                spawnedTile.Init(isOffset);
+               spawnedTile.Init(isOffset);
 
+                tiles[new Vector2(x, y)] = spawnedTile;
             }
         }
 
         cam.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
+    }
+
+    public Tile GetTileAtPosition(Vector2 pos) 
+    {
+     if(tiles.TryGetValue(pos, out var tile))
+        {
+            return tile;
+        }
+        return null;
+
     }
 
 }

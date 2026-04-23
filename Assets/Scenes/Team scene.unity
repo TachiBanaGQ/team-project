@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 16
   height: 9
-  tilePrefab: {fileID: 5662053843300638725, guid: 8a8a3726c5280be469cd18fafa58a32b, type: 3}
+  tilePrefab: {fileID: -1689748934910136679, guid: 25e3f1a1897a3d64e9a931ada178a2fc, type: 3}
   cam: {fileID: 2104293475}
 --- !u!4 &21903805
 Transform:
