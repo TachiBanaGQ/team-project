@@ -65,6 +65,7 @@ public class Playermove : MonoBehaviour
             if (_pa.IsHitting())
             {
                 _currentState = "Hitting";
+
                 return;
             }
         }
