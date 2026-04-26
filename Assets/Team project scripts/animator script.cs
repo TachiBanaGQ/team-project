@@ -10,6 +10,8 @@ public class animatorscript : MonoBehaviour
     public bool IsHitting;
     public bool IsHurting;
     public bool syncAnimator = true;
+   
+
 
 
     // Update is called once per frame
@@ -35,4 +37,15 @@ public class animatorscript : MonoBehaviour
         }
 
     }
+
+    public void Hitting()
+    {
+        animator.SetBool("IsHitting", true );
+    }
+
+    public void Hurting()
+    {
+        animator.SetBool("IsHurting",true );
+    }
+   
 }

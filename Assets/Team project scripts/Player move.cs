@@ -1,4 +1,5 @@
-using Unity.VisualScripting.ReorderableList;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Playermove : MonoBehaviour
@@ -6,7 +7,7 @@ public class Playermove : MonoBehaviour
     PlayerAction _pa;
     public string _currentState;
     Vector2 _direction;
-
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,7 +29,7 @@ public class Playermove : MonoBehaviour
         }
         else if (_currentState == "Attacking")
         {
-            Attacking();
+            Hitting();
         }
         else if(_currentState == "Hurting")
         {
@@ -55,7 +56,7 @@ public class Playermove : MonoBehaviour
                 return;
             }
         }
-        void Attacking()
+        void Hitting()
         {
             if(_direction != Vector2.zero)
             {
@@ -83,4 +84,6 @@ public class Playermove : MonoBehaviour
             return _currentState;
         }
     }
+
+   
 }
