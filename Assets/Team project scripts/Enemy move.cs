@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Enemymove : MonoBehaviour
 {
@@ -72,6 +73,8 @@ public class Enemymove : MonoBehaviour
     {
         if (GetComponent<Collider>().gameObject.tag == "Player")
         {
+            SceneManager.LoadScene("BattleScene");
+            Debug.Log("load");
             Flee = true;
         }
     }
