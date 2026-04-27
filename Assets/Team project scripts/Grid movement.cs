@@ -85,7 +85,7 @@ public class Gridmovement : MonoBehaviour
         //Make sure we end up excactly where we want.
         transform.position = endPosition;
 
-        //We're no longer kmoving so we can accept another move input.
+        //We're no longer moving so we can accept another move input.
         isMoving = false;
     }
 

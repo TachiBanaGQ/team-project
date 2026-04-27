@@ -4,11 +4,11 @@ using UnityEngine;
 public class PlayerMoveTrigger : MonoBehaviour
 {
     //Public GeneralActions generalaction;
-    public Player player;
-    public Animator animator;
-    public bool Idle;
-    public bool Iswalking;
-    public bool IsAttacking;
+    [SerializeField] public Player player;
+    [SerializeField] public Animator animator;
+    [SerializeField] public bool Idle;
+    [SerializeField] public bool Iswalking;
+    [SerializeField] public bool IsAttacking;
 
     public bool syncAnimator = true;
     void Start()
