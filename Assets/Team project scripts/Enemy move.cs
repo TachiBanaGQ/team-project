@@ -4,7 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class Enemymove : MonoBehaviour
 {
-    [SerializeField] public Transform Player;
+    [SerializeField] private Transform Player;
+    [SerializeField] private Rigidbody2D rb;
+
+    [SerializeField] private EnemyState enemyState, newState;
+
     [SerializeField] float ChaseSpeed;
 
     [SerializeField] float AggroDist;
@@ -18,10 +22,15 @@ public class Enemymove : MonoBehaviour
     [SerializeField] private bool isMoving = false;
     [SerializeField] private float moveDuration = 1.0f;
 
+    [SerializeField] private Animator anim;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
 
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        ChangeState(EnemyState.Idle);
     }
 
     // Update is called once per frame
@@ -43,7 +52,7 @@ public class Enemymove : MonoBehaviour
 
     }
 
-    private IEnumerator Move(Vector2 direction)
+    /*private IEnumerator Move(Vector2 direction)
     {
 
         //Make a note of where we are and where we are going.
@@ -64,18 +73,64 @@ public class Enemymove : MonoBehaviour
         }
 
         //Make sure we end up excactly where we want.
-        transform.position = endPosition;
+        transform.position = endPosition; 
 
         //We're no longer moving so we can accept another move input.
-        isMoving = false;
-    }
-    public void OnCollisionEnter2D(Collision2D collision)
+       // isMoving = false;
+    }*/
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (GetComponent<Collider>().gameObject.tag == "Player")
+        if (GetComponent<Collision>().gameObject.tag == "Player")
         {
             SceneManager.LoadScene("BattleScene");
             Debug.Log("load");
-            Flee = true;
+            if (Player == null)
+            {
+                Player = collision.transform;
+            }
+
+            
+            ChangeState(EnemyState.Moving);
         }
     }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (GetComponent<Collision>().gameObject.tag == "Player")
+        {
+
+            
+            ChangeState(EnemyState.Idle);
+        }
+    }
+
+    void ChangeState(EnemyState newState)
+    {
+        //Exit the current animation
+        if (enemyState == EnemyState.Idle)
+        {
+            anim.SetBool("IsIdle", false);
+        }
+        else if (enemyState == EnemyState.Moving)
+        {
+            anim.SetBool("IsMoving", false);
+        }
+
+        //Update our current state
+        enemyState = newState;
+
+        //Update the new animation
+        if (enemyState == EnemyState.Idle)
+        {
+            anim.SetBool("IsIdle", true);
+        }
+        else if (enemyState == EnemyState.Moving)
+        {
+            anim.SetBool("IsMoving", true);
+        }
+    }
+}
+
+public enum EnemyState
+{
+    Idle, Moving, Hurting, Hitting
 }
