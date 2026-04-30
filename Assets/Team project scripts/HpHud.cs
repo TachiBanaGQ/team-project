@@ -1,19 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HpHud : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public Text nameText;
-    public Text levelText;
-    public Slider hpSlider;
+    
+    [SerializeField] private TMP_Text nameText;
+    [SerializeField] private Slider hpSlider;
 
     public void SetHUD(Unit unit)
     {
         nameText.text = unit.unitName;
-        levelText.text = "Lvl1" + unit.unitLevel;
         hpSlider.maxValue = unit.maxHp;
         hpSlider.value = unit.currentHP;
     }
