@@ -135,7 +135,7 @@ public class Enemymove : MonoBehaviour
 
         else if (enemyState == EnemyState.Moving)
 
-            anim.SetBool("IsMoving", false);
+        { anim.SetBool("IsMoving", false); }
 
 
         //Update our current state
