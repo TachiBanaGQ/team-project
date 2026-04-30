@@ -95,25 +95,81 @@ public class Turnstatemachine : MonoBehaviour
 
     IEnumerator EnemyTurn()
     {
-        dialogueText.text = $"{enemyUnit.name} attacks!";
-        yield return new WaitForSeconds(1f);
-
-        bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
-
-        playerHUD.SetHP(playerUnit.currentHP);
-
-        yield return new WaitForSeconds(1f);
-
-        if (isDead)
+        if (enemyUnit.currentHP < 9)
         {
-            state = BattleState.LOST;
-            EndBattle();
-        } else
-        {
-            state = BattleState.PLAYERTURN;
-            PlayerTurn();
+            int crit = Random.Range(0, 4);
+            if (crit == 4)
+            {
+                dialogueText.text = $"{enemyUnit.name} uses a draining attack!";
+                yield return new WaitForSeconds(1f);
+
+                bool isDead = playerUnit.TakeDamage(enemyUnit.ultraDamage);
+                enemyUnit.Heal(enemyUnit.healDamage);
+
+                playerHUD.SetHP(playerUnit.currentHP);
+                enemyHUD.SetHP(enemyUnit.currentHP);
+
+                yield return new WaitForSeconds(1f);
+
+                if (isDead)
+                {
+                    state = BattleState.LOST;
+                    EndBattle();
+                }
+                else
+                {
+                    state = BattleState.PLAYERTURN;
+                    PlayerTurn();
+                }
+            }
+            else
+            {
+                dialogueText.text = $"{enemyUnit.name} attacks!";
+                yield return new WaitForSeconds(1f);
+
+                bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
+
+
+                playerHUD.SetHP(playerUnit.currentHP);
+
+                yield return new WaitForSeconds(1f);
+
+                if (isDead)
+                {
+                    state = BattleState.LOST;
+                    EndBattle();
+                }
+                else
+                {
+                    state = BattleState.PLAYERTURN;
+                    PlayerTurn();
+                }
+            }
         }
 
+        else
+        {
+            dialogueText.text = $"{enemyUnit.name} attacks!";
+            yield return new WaitForSeconds(1f);
+
+            bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
+
+
+            playerHUD.SetHP(playerUnit.currentHP);
+
+            yield return new WaitForSeconds(1f);
+
+            if (isDead)
+            {
+                state = BattleState.LOST;
+                EndBattle();
+            }
+            else
+            {
+                state = BattleState.PLAYERTURN;
+                PlayerTurn();
+            }
+        }
     }
 
     void EndBattle()

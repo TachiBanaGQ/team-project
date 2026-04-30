@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: BattlePlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 5474057468579165295, guid: 24834b490bf625a459fa2e82aa195d04, type: 3}
+      propertyPath: healDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5474057468579165295, guid: 24834b490bf625a459fa2e82aa195d04, type: 3}
+      propertyPath: ultraDamage
+      value: 9999
+      objectReference: {fileID: 0}
     - target: {fileID: 5947838840156866192, guid: 24834b490bf625a459fa2e82aa195d04, type: 3}
       propertyPath: m_LocalScale.x
       value: 8
