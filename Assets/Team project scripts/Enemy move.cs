@@ -75,50 +75,24 @@ public class Enemymove : MonoBehaviour
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
     }
 
-    private IEnumerator Move(Vector2 direction)
-    {
-
-        //Make a note of where we are and where we are going.
-        isMoving = true;
-
-        //Make a note of where we are and whewre we are going.
-        Vector2 startPosition = transform.position;
-        Vector2 endPosition = startPosition + (direction * gridSize);
-
-        //Smoothly move in the desired direction taking the required time.
-        float elapsedTime = 0;
-        while (elapsedTime < Time.deltaTime)
-        {
-            elapsedTime += Time.deltaTime;
-            float percent = elapsedTime / moveDuration;
-            transform.position = Vector2.Lerp(startPosition, endPosition, percent);
-            yield return null;
-        }
-
-        //Make sure we end up excactly where we want.
-        transform.position = endPosition;
-
-        //We're no longer moving so we can accept another move input.
-        isMoving = false;
-    }
+   
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (GetComponent<Collision>().gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
             SceneManager.LoadScene("BattleScene");
             Debug.Log("load");
             if (Player == null)
             {
                 Player = collision.transform;
-
             }
             ChangeState(EnemyState.Moving);
         }
     }
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (GetComponent<Collision>().gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
 
             rb.linearVelocity = Vector2.zero;

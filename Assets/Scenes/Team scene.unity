@@ -1431,14 +1431,14 @@ MonoBehaviour:
   rb: {fileID: 7712096149249596034}
   facingDirection: -1
   enemyState: 0
-  newState: 1
+  newState: 0
   ChaseSpeed: 1
   AggroDist: 3
   StopDistance: 0.5
   ReturnDistance: 2.5
   Flee: 0
   gridSize: 1
-  isMoving: 0
+  isMoving: 1
   moveDuration: 1
   anim: {fileID: 7712096149249596029}
 --- !u!114 &8212447338264769222
