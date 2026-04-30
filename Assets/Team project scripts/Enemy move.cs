@@ -6,6 +6,7 @@ public class Enemymove : MonoBehaviour
 {
     [SerializeField] private Transform Player;
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private int facingDirection = -1;
 
     [SerializeField] private EnemyState enemyState, newState;
 
@@ -36,20 +37,42 @@ public class Enemymove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (enemyState == EnemyState.Moving)
+        {
+            if (Player.position.x > transform.position.x && facingDirection == -1 || Player.position.x < transform.position.x && facingDirection == 1)
+            {
+
+                Flip();
+            }
+            Vector2 direction = (Player.position - transform.position).normalized;
+            rb.linearVelocity = direction * gridSize;
+
+
+        }
+
         float distance = Vector2.Distance(transform.position, Player.position);
+
 
         if (distance > AggroDist || distance <= StopDistance) return;
 
         if (!Flee)
         {
-            transform.position = Vector2.MoveTowards(transform.position, Player.position, ChaseSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, Player.position, ChaseSpeed * Time.deltaTime * gridSize);
         }
         else
         {
             if (distance > ReturnDistance) Flee = false;
-            transform.position = Vector2.MoveTowards(transform.position, Player.position, -1 * ChaseSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, Player.position, -1 * ChaseSpeed * Time.deltaTime * gridSize);
         }
 
+        
+
+    }
+
+    void Flip()
+    {
+        facingDirection *= -1;
+        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
     }
 
     private IEnumerator Move(Vector2 direction)
@@ -73,7 +96,7 @@ public class Enemymove : MonoBehaviour
         }
 
         //Make sure we end up excactly where we want.
-        transform.position = endPosition; 
+        transform.position = endPosition;
 
         //We're no longer moving so we can accept another move input.
         isMoving = false;
@@ -88,9 +111,8 @@ public class Enemymove : MonoBehaviour
             if (Player == null)
             {
                 Player = collision.transform;
-            }
 
-            
+            }
             ChangeState(EnemyState.Moving);
         }
     }
@@ -99,7 +121,7 @@ public class Enemymove : MonoBehaviour
         if (GetComponent<Collision>().gameObject.tag == "Player")
         {
 
-            
+            rb.linearVelocity = Vector2.zero;
             ChangeState(EnemyState.Idle);
         }
     }
@@ -108,25 +130,25 @@ public class Enemymove : MonoBehaviour
     {
         //Exit the current animation
         if (enemyState == EnemyState.Idle)
-        
+
             anim.SetBool("IsIdle", false);
-        
+
         else if (enemyState == EnemyState.Moving)
-        
+
             anim.SetBool("IsMoving", false);
-        
+
 
         //Update our current state
         enemyState = newState;
 
         //Update the new animation
         if (enemyState == EnemyState.Idle)
-        
+
             anim.SetBool("IsIdle", true);
-        
+
         else if (enemyState == EnemyState.Moving)
             anim.SetBool("IsMoving", true);
-        
+
     }
 }
 

@@ -1429,15 +1429,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1634297829250761359}
   rb: {fileID: 7712096149249596034}
+  facingDirection: -1
   enemyState: 0
   newState: 1
   ChaseSpeed: 1
-  AggroDist: 4
+  AggroDist: 3
   StopDistance: 0.5
   ReturnDistance: 2.5
   Flee: 0
   gridSize: 1
-  isMoving: 1
+  isMoving: 0
   moveDuration: 1
   anim: {fileID: 7712096149249596029}
 --- !u!114 &8212447338264769222
