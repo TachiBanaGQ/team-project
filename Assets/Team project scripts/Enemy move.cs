@@ -52,7 +52,7 @@ public class Enemymove : MonoBehaviour
 
     }
 
-    /*private IEnumerator Move(Vector2 direction)
+    private IEnumerator Move(Vector2 direction)
     {
 
         //Make a note of where we are and where we are going.
@@ -76,8 +76,9 @@ public class Enemymove : MonoBehaviour
         transform.position = endPosition; 
 
         //We're no longer moving so we can accept another move input.
-       // isMoving = false;
-    }*/
+        isMoving = false;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (GetComponent<Collision>().gameObject.tag == "Player")
@@ -107,26 +108,25 @@ public class Enemymove : MonoBehaviour
     {
         //Exit the current animation
         if (enemyState == EnemyState.Idle)
-        {
+        
             anim.SetBool("IsIdle", false);
-        }
+        
         else if (enemyState == EnemyState.Moving)
-        {
+        
             anim.SetBool("IsMoving", false);
-        }
+        
 
         //Update our current state
         enemyState = newState;
 
         //Update the new animation
         if (enemyState == EnemyState.Idle)
-        {
+        
             anim.SetBool("IsIdle", true);
-        }
+        
         else if (enemyState == EnemyState.Moving)
-        {
             anim.SetBool("IsMoving", true);
-        }
+        
     }
 }
 
