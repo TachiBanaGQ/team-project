@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6811582851416942426}
-  - component: {fileID: 8300015150990608356}
   m_Layer: 0
   m_Name: HUDManager
   m_TagString: Untagged
@@ -32,23 +31,3 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8300015150990608356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4452594340913094668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b407be9a6a4f814f99428f4555de383, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 6723262089538617207, guid: c0a548712b46fca4e9e4ad49e5b5c922, type: 3}
-  enemyPrefab: {fileID: 288259477889871945, guid: 14cf5a86cfdfa0044990b2952c8ce9df, type: 3}
-  playerCoordinate: {fileID: 0}
-  enemyCoordinate: {fileID: 0}
-  playerHUD: {fileID: 0}
-  enemyHUD: {fileID: 0}
-  dialogueText: {fileID: 0}
-  state: 0

@@ -5,9 +5,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public enum BattleState {START, PLAYERTURN, ENEMYTURN, WON, LOST}
+public enum BattleState {INACTIVE, START, PLAYERTURN, ENEMYTURN, WON, LOST}
 
-public class Turnstatemachine : MonoBehaviour
+public class BattleManager : MonoBehaviour
 {
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject enemyPrefab;
@@ -23,22 +23,24 @@ public class Turnstatemachine : MonoBehaviour
     Unit enemyUnit;
 
     [SerializeField] private TMP_Text dialogueText;
+    [SerializeField] private GameObject battleHUD;
 
 
 
-
-   public BattleState state;
+    public BattleState state;
 
     void Start()
     {
-        state = BattleState.START;
-        StartCoroutine(SetupBattle());
+        battleHUD.SetActive(false);
+        state = BattleState.INACTIVE;
+        //StartCoroutine(SetupBattle());
     }
 
    IEnumerator SetupBattle()
     {
-        
-       GameObject playerAct =  Instantiate(playerPrefab, playerCoordinate);
+        battleHUD.SetActive(true);
+       
+        GameObject playerAct =  Instantiate(playerPrefab, playerCoordinate);
         playerUnit = playerAct.GetComponent<Unit>();
 
         GameObject enemyAct = Instantiate(enemyPrefab, enemyCoordinate);
