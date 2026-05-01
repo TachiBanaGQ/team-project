@@ -13,7 +13,8 @@ public class Gridmovement : MonoBehaviour
     //the size of the grid 
     [SerializeField] private float gridSize = 1f;
 
-    private InputSystem_Actions InputSystem_Actions;
+    [SerializeField] private InputSystem_Actions InputSystem_Actions;
+
     public InputAction move;
     private bool isMoving = false;
 

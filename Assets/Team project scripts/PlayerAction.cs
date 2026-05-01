@@ -5,11 +5,13 @@ using System.Collections.Generic;
 
 public class PlayerAction : MonoBehaviour
 {
+    [SerializeField] GameObject player;
+    
     InputAction _moveAction;
     InputAction _damageAction;
     InputAction _attackAction;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] private BattleManager bm;
     void Start()
     {
         _moveAction = InputSystem.actions.FindAction("Move");
@@ -25,5 +27,13 @@ public class PlayerAction : MonoBehaviour
     {
       return _attackAction.IsPressed();
     }
-   
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Encounter"))
+        {
+            bm.LaunchBattle(player, collision.gameObject);
+        }
+    }
+
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,11 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private HpHud playerHUD;
     [SerializeField] private HpHud enemyHUD;
 
+    private GameObject playerGO;
+    private GameObject enemyGO;
+    private GameObject playerAct;
+    private GameObject enemyAct;
+
 
     Unit playerUnit;
     Unit enemyUnit;
@@ -33,17 +39,26 @@ public class BattleManager : MonoBehaviour
     {
         battleHUD.SetActive(false);
         state = BattleState.INACTIVE;
-        //StartCoroutine(SetupBattle());
+        
     }
 
-   IEnumerator SetupBattle()
+    public void LaunchBattle(GameObject player, GameObject enemy)
+    {
+        playerGO = player;
+        playerGO.SetActive(false);
+        enemyGO = enemy;
+        enemyGO.SetActive(false);
+        StartCoroutine(SetupBattle());
+    }
+
+    IEnumerator SetupBattle()
     {
         battleHUD.SetActive(true);
        
-        GameObject playerAct =  Instantiate(playerPrefab, playerCoordinate);
+        playerAct =  Instantiate(playerPrefab, playerCoordinate);
         playerUnit = playerAct.GetComponent<Unit>();
 
-        GameObject enemyAct = Instantiate(enemyPrefab, enemyCoordinate);
+        enemyAct = Instantiate(enemyPrefab, enemyCoordinate);
         enemyUnit = enemyAct.GetComponent<Unit>();
 
         dialogueText.text = $"{enemyUnit.unitName} appears!";
@@ -72,7 +87,7 @@ public class BattleManager : MonoBehaviour
         if (isDead)
         {
             state = BattleState.WON;
-            //EndBattle();
+            StartCoroutine(EndBattle());
         }
         else
         {
@@ -117,7 +132,7 @@ public class BattleManager : MonoBehaviour
                 if (isDead)
                 {
                     state = BattleState.LOST;
-                    EndBattle();
+                    StartCoroutine(EndBattle());
                 }
                 else
                 {
@@ -140,7 +155,7 @@ public class BattleManager : MonoBehaviour
                 if (isDead)
                 {
                     state = BattleState.LOST;
-                    EndBattle();
+                    StartCoroutine(EndBattle());
                 }
                 else
                 {
@@ -165,7 +180,7 @@ public class BattleManager : MonoBehaviour
             if (isDead)
             {
                 state = BattleState.LOST;
-                EndBattle();
+                StartCoroutine(EndBattle());
             }
             else
             {
@@ -175,14 +190,22 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    void EndBattle()
+    IEnumerator EndBattle()
     {
         if (state == BattleState.WON)
         {
             dialogueText.text = "You win! Yay!";
+            yield return new WaitForSeconds(5f);
+            battleHUD.SetActive(false);
+
+            playerGO.SetActive(true);
+            
+
         } else if(state == BattleState.LOST)
         {
             dialogueText.text = "You lost...";
+            yield return new WaitForSeconds(10f);
+            //scene change main menu
         }
     }
 

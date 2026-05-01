@@ -177,11 +177,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2819947280133487076, guid: e6e2f889da650e743822bb9e9e7618b9, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.74
       objectReference: {fileID: 0}
     - target: {fileID: 2819947280133487076, guid: e6e2f889da650e743822bb9e9e7618b9, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5976674384823000161, guid: e6e2f889da650e743822bb9e9e7618b9, type: 3}
       propertyPath: m_Name
@@ -407,6 +407,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 436242588}
     - target: {fileID: 8300015150990608356, guid: cc56e933ed87faf4e995a80bffe4083a, type: 3}
+      propertyPath: battleHUD
+      value: 
+      objectReference: {fileID: 1421840432}
+    - target: {fileID: 8300015150990608356, guid: cc56e933ed87faf4e995a80bffe4083a, type: 3}
       propertyPath: playerHUD
       value: 
       objectReference: {fileID: 1393856471}
@@ -425,8 +429,37 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4452594340913094668, guid: cc56e933ed87faf4e995a80bffe4083a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 597871032}
   m_SourcePrefab: {fileID: 100100000, guid: cc56e933ed87faf4e995a80bffe4083a, type: 3}
+--- !u!1 &597871031 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4452594340913094668, guid: cc56e933ed87faf4e995a80bffe4083a, type: 3}
+  m_PrefabInstance: {fileID: 597871030}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &597871032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597871031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b407be9a6a4f814f99428f4555de383, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 6723262089538617207, guid: c0a548712b46fca4e9e4ad49e5b5c922, type: 3}
+  enemyPrefab: {fileID: 288259477889871945, guid: 14cf5a86cfdfa0044990b2952c8ce9df, type: 3}
+  playerCoordinate: {fileID: 585587873}
+  enemyCoordinate: {fileID: 1959438950}
+  playerHUD: {fileID: 1393856471}
+  enemyHUD: {fileID: 436242588}
+  dialogueText: {fileID: 1001947198}
+  battleHUD: {fileID: 1421840432}
+  state: 0
 --- !u!1 &655671545
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,6 +609,84 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8665006065212084798, guid: a785b94f58b32fd48a56cd0f403adae1, type: 3}
   m_PrefabInstance: {fileID: 1001947197}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1267733200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1267733201}
+  - component: {fileID: 1267733202}
+  m_Layer: 0
+  m_Name: BattleTrigger
+  m_TagString: Encounter
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1267733201
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267733200}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1558289769692373197}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1267733202
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267733200}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.000000074505806, y: -0.019673347}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.32, y: 0.32}
+    newSize: {x: 0.32, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.26753792, y: 0.3593467}
+  m_EdgeRadius: 0
 --- !u!1 &1287342478
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,11 +776,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1772213097574680283, guid: c0b559dda17b56b429b6792d8cdb2d2f, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.74
       objectReference: {fileID: 0}
     - target: {fileID: 1772213097574680283, guid: c0b559dda17b56b429b6792d8cdb2d2f, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2441818697166761521, guid: c0b559dda17b56b429b6792d8cdb2d2f, type: 3}
       propertyPath: m_Name
@@ -791,7 +902,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1421840433
 RectTransform:
   m_ObjectHideFlags: 0
@@ -850,6 +961,7 @@ MonoBehaviour:
   playerHUD: {fileID: 0}
   enemyHUD: {fileID: 0}
   dialogueText: {fileID: 0}
+  battleHUD: {fileID: 0}
   state: 0
 --- !u!4 &1507529671
 Transform:
@@ -1616,7 +1728,8 @@ Transform:
   m_LocalPosition: {x: 5.43, y: 3.71, z: 0}
   m_LocalScale: {x: 3.83, y: 3.83, z: 3.83}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1267733201}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1634297829250761359
@@ -1888,7 +2001,6 @@ GameObject:
   - component: {fileID: 7712096149249596034}
   - component: {fileID: 7712096149249596036}
   - component: {fileID: 7712096149249596037}
-  - component: {fileID: 7712096149249596038}
   m_Layer: 0
   m_Name: EnemyE
   m_TagString: Enemy
@@ -2007,52 +2119,6 @@ MonoBehaviour:
   Flee: 0
   gridSize: 1
   anim: {fileID: 7712096149249596029}
---- !u!61 &7712096149249596038
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7009024040533723787}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: -0.000000074505806, y: -0.019673347}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
-    newSize: {x: 0.32, y: 0.32}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.26753792, y: 0.3593467}
-  m_EdgeRadius: 0
 --- !u!114 &8212447338264769222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2078,6 +2144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f4924a57e5040a4c8f2391e0664acff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 3586171538858888113}
+  bm: {fileID: 597871032}
 --- !u!50 &8835121062850567967
 Rigidbody2D:
   serializedVersion: 5
