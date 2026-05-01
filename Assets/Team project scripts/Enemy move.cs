@@ -1,14 +1,15 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Enemymove : MonoBehaviour
 {
     [SerializeField] private Transform Player;
+    Enemymove ea;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private int facingDirection = -1;
 
     [SerializeField] private EnemyState enemyState, newState;
+    [SerializeField] public string _currentState;
+    [SerializeField] Vector2 _direction;
 
     [SerializeField] float ChaseSpeed;
 
@@ -20,7 +21,7 @@ public class Enemymove : MonoBehaviour
     [SerializeField] bool Flee = false;
 
     [SerializeField] private float gridSize = 1f;
-    
+
 
     [SerializeField] private Animator anim;
 
@@ -30,24 +31,22 @@ public class Enemymove : MonoBehaviour
         //don't destroy on load function
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        ea = GetComponent<Enemymove>();
         ChangeState(EnemyState.Idle);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (enemyState == EnemyState.Moving)
+
+        if (Player.position.x > transform.position.x && facingDirection == -1 || Player.position.x < transform.position.x && facingDirection == 1)
         {
-            if (Player.position.x > transform.position.x && facingDirection == -1 || Player.position.x < transform.position.x && facingDirection == 1)
-            {
 
-                Flip();
-            }
-            Vector2 direction = (Player.position - transform.position).normalized;
-            rb.linearVelocity = direction * gridSize;
-
-
+            Flip();
         }
+        Vector2 direction = (Player.position - transform.position).normalized;
+        rb.linearVelocity = direction * gridSize;
+
 
         float distance = Vector2.Distance(transform.position, Player.position);
 
@@ -64,7 +63,50 @@ public class Enemymove : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, Player.position, -1 * ChaseSpeed * Time.deltaTime * gridSize);
         }
 
+        if (_currentState == "Idle")
+        {
+
+        }
+        else if (_currentState == "IsMoving")
+        {
+
+        }
+        else if (_currentState == "Attacking")
+        {
+
+        }
+        else if (_currentState == "Hurting")
+        {
+
+        }
+
+    }
+
+    void Idle()
+    {
+        if (_direction != Vector2.zero)
+        {
+            _currentState = "Moving";
+            return;
+        }
+    }
+
+    void Moving()
+    {
+        if (_direction != Vector2.zero)
+        {
+            _currentState = "Idle";
+            return;
+        }
         
+        {
+            _currentState = "Moving";
+            return;
+        }
+    }
+
+    void Hitting()
+    {
 
     }
 
@@ -74,13 +116,13 @@ public class Enemymove : MonoBehaviour
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
     }
 
-   
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            
+
             Debug.Log("load");
             if (Player == null)
             {
