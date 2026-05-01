@@ -28,7 +28,7 @@ public class Enemymove : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        //don't destroy on load function
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         ChangeState(EnemyState.Idle);
@@ -81,7 +81,7 @@ public class Enemymove : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene("BattleScene");
+            
             Debug.Log("load");
             if (Player == null)
             {

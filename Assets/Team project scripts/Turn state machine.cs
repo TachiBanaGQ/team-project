@@ -63,7 +63,7 @@ public class Turnstatemachine : MonoBehaviour
         enemyHUD.SetHP(enemyUnit.currentHP);
         dialogueText.text = "You hit the enemy!";
 
-
+        //call hurt function for hit enemy
 
         yield return new WaitForSeconds(2f);
 
@@ -74,6 +74,7 @@ public class Turnstatemachine : MonoBehaviour
         }
         else
         {
+            //return enemy back to idle
             state = BattleState.ENEMYTURN;
             StartCoroutine(EnemyTurn());
         }
