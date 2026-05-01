@@ -20,8 +20,7 @@ public class Enemymove : MonoBehaviour
     [SerializeField] bool Flee = false;
 
     [SerializeField] private float gridSize = 1f;
-    [SerializeField] private bool isMoving = false;
-    [SerializeField] private float moveDuration = 1.0f;
+    
 
     [SerializeField] private Animator anim;
 
@@ -111,6 +110,14 @@ public class Enemymove : MonoBehaviour
 
         { anim.SetBool("IsMoving", false); }
 
+        if (enemyState == EnemyState.Hitting)
+
+            anim.SetBool("IsHitting", false);
+
+        else if (enemyState == EnemyState.Hurting)
+
+        { anim.SetBool("IsHurting", false); }
+
 
         //Update our current state
         enemyState = newState;
@@ -123,6 +130,13 @@ public class Enemymove : MonoBehaviour
         else if (enemyState == EnemyState.Moving)
             anim.SetBool("IsMoving", true);
 
+        if (enemyState == EnemyState.Hitting)
+
+            anim.SetBool("IsHitting", true);
+
+        else if (enemyState == EnemyState.Hurting)
+
+        { anim.SetBool("IsHurting", true); }
     }
 }
 
