@@ -98,7 +98,7 @@ public class Enemymove : MonoBehaviour
             _currentState = "Idle";
             return;
         }
-        
+
         {
             _currentState = "Moving";
             return;
@@ -150,7 +150,7 @@ public class Enemymove : MonoBehaviour
 
         else if (enemyState == EnemyState.Moving)
 
-        { anim.SetBool("IsMoving", false); }
+            anim.SetBool("IsMoving", false);
 
         if (enemyState == EnemyState.Hitting)
 
@@ -158,7 +158,7 @@ public class Enemymove : MonoBehaviour
 
         else if (enemyState == EnemyState.Hurting)
 
-        { anim.SetBool("IsHurting", false); }
+            anim.SetBool("IsHurting", false);
 
 
         //Update our current state
