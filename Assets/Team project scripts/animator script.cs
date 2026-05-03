@@ -3,8 +3,6 @@ using UnityEngine;
 public class animatorscript : MonoBehaviour
 {
     public PlayerAction playeraction;
-    public EnemyState enemyState;
-    [SerializeField] public GameObject enemy;
     [SerializeField] public Player Guy;
     [SerializeField] public Animator animator;
     public bool Idle;

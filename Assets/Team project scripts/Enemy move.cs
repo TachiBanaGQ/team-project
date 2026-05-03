@@ -1,10 +1,12 @@
-using UnityEditor.Build;
+using System.Collections;
+using System.Collections.Generic;
+
 using UnityEngine;
 
 public class Enemymove : MonoBehaviour
 {
     [SerializeField] private Transform Player;
-    Enemymove ea;
+   
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private int facingDirection = -1;
 
@@ -22,7 +24,6 @@ public class Enemymove : MonoBehaviour
     [SerializeField] bool Flee = false;
 
     [SerializeField] private float gridSize = 1f;
-
 
     [SerializeField] private Animator anim;
 
@@ -45,7 +46,7 @@ public class Enemymove : MonoBehaviour
             Flip();
         }
         Vector2 direction = (Player.position - transform.position).normalized;
-        rb.linearVelocity = direction * gridSize;
+        rb.linearVelocity = direction;
 
 
         float distance = Vector2.Distance(transform.position, Player.position);
@@ -55,13 +56,13 @@ public class Enemymove : MonoBehaviour
 
         if (!Flee)
         {
-            transform.position = Vector2.MoveTowards(transform.position, Player.position, ChaseSpeed * Time.deltaTime * gridSize);
+            transform.position = Vector2.MoveTowards(transform.position, Player.position, ChaseSpeed * Time.deltaTime );
            
         }
         else
         {
             if (distance > ReturnDistance) Flee = false;
-            transform.position = Vector2.MoveTowards(transform.position, Player.position, -1 * ChaseSpeed * Time.deltaTime * gridSize);
+            transform.position = Vector2.MoveTowards(transform.position, Player.position, -1 * ChaseSpeed * Time.deltaTime );
         }
 
 
@@ -84,15 +85,15 @@ public class Enemymove : MonoBehaviour
         Debug.Log("Trying to on trigger enter");
         if (other.CompareTag("Player"))
         {
-
+            Player = other.transform;
             Debug.Log("load");
       
             ChangeState(EnemyState.Moving);
         }
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        if (collision.gameObject.tag == "Player")
+        if (other.CompareTag("Player"))
         {
 
             rb.linearVelocity = Vector2.zero;
