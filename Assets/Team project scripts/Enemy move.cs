@@ -1,3 +1,4 @@
+using UnityEditor.Build;
 using UnityEngine;
 
 public class Enemymove : MonoBehaviour
@@ -31,7 +32,6 @@ public class Enemymove : MonoBehaviour
         //don't destroy on load function
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        ea = GetComponent<Enemymove>();
         ChangeState(EnemyState.Idle);
     }
 
@@ -56,6 +56,7 @@ public class Enemymove : MonoBehaviour
         if (!Flee)
         {
             transform.position = Vector2.MoveTowards(transform.position, Player.position, ChaseSpeed * Time.deltaTime * gridSize);
+           
         }
         else
         {
@@ -63,52 +64,13 @@ public class Enemymove : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, Player.position, -1 * ChaseSpeed * Time.deltaTime * gridSize);
         }
 
-        if (_currentState == "Idle")
-        {
 
-        }
-        else if (_currentState == "IsMoving")
-        {
-
-        }
-        else if (_currentState == "Attacking")
-        {
-
-        }
-        else if (_currentState == "Hurting")
-        {
-
-        }
-
+        UpdateAnimatior();
     }
 
-    void Idle()
-    {
-        if (_direction != Vector2.zero)
-        {
-            _currentState = "Moving";
-            return;
-        }
-    }
 
-    void Moving()
-    {
-        if (_direction != Vector2.zero)
-        {
-            _currentState = "Idle";
-            return;
-        }
 
-        {
-            _currentState = "Moving";
-            return;
-        }
-    }
 
-    void Hitting()
-    {
-
-    }
 
     void Flip()
     {
@@ -117,17 +79,14 @@ public class Enemymove : MonoBehaviour
     }
 
 
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.tag == "Player")
+        Debug.Log("Trying to on trigger enter");
+        if (other.CompareTag("Player"))
         {
 
             Debug.Log("load");
-            if (Player == null)
-            {
-                Player = collision.transform;
-            }
+      
             ChangeState(EnemyState.Moving);
         }
     }
@@ -140,47 +99,73 @@ public class Enemymove : MonoBehaviour
             ChangeState(EnemyState.Idle);
         }
     }
+   
+    /// <summary>
+    /// Getter
+    /// </summary>
+    /// <returns></returns>
+    public EnemyState CurrentState()
+    {
+        return enemyState;
+    }
 
-    void ChangeState(EnemyState newState)
+    /// <summary>
+    /// Setter
+    /// </summary>
+    /// <param name="newState"></param>
+    public void ChangeState(EnemyState newState)
+    {
+        enemyState = newState;
+    }
+    private void UpdateAnimatior()
     {
         //Exit the current animation
-        if (enemyState == EnemyState.Idle)
+        switch (enemyState)
+        {
+           
+            case EnemyState.Moving:
+                anim.SetBool("IsMoving", true);
+                break;
+            case EnemyState.Hurting:
+                anim.SetBool("IsHurting", true);
+
+                break;
+            case EnemyState.Hitting:
+                anim.SetBool("IsHitting", true);
+                break;
+
+        }
+
+        if (enemyState != EnemyState.Idle)
+        {
 
             anim.SetBool("IsIdle", false);
-
-        else if (enemyState == EnemyState.Moving)
-
+        }
+        else
+        {
             anim.SetBool("IsMoving", false);
-
-        if (enemyState == EnemyState.Hitting)
-
             anim.SetBool("IsHitting", false);
-
-        else if (enemyState == EnemyState.Hurting)
-
             anim.SetBool("IsHurting", false);
-
-
-        //Update our current state
-        enemyState = newState;
-
-        //Update the new animation
-        if (enemyState == EnemyState.Idle)
-
             anim.SetBool("IsIdle", true);
 
-        else if (enemyState == EnemyState.Moving)
-            anim.SetBool("IsMoving", true);
+        } 
 
-        if (enemyState == EnemyState.Hitting)
-
-            anim.SetBool("IsHitting", true);
-
-        else if (enemyState == EnemyState.Hurting)
-
-        { anim.SetBool("IsHurting", true); }
+        Debug.Log("checking to see if this works in the update loop");
     }
+
+
+
+
+    //Update our current state
+
+
+    //Update the new animation
+
+
+
+
 }
+
 
 public enum EnemyState
 {

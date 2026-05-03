@@ -20,7 +20,7 @@ public class Gridmovement : MonoBehaviour
 
     private void OnEnable()
     {
-        move = InputSystem_Actions.Player.Move;
+        move = InputSystem_Actions?.Player.Move;
     }
     private void Update()
     {

@@ -3,8 +3,10 @@ using UnityEngine;
 public class animatorscript : MonoBehaviour
 {
     public PlayerAction playeraction;
-    public Player Guy;
-    public Animator animator;
+    public EnemyState enemyState;
+    [SerializeField] public GameObject enemy;
+    [SerializeField] public Player Guy;
+    [SerializeField] public Animator animator;
     public bool Idle;
     public bool IsMoving;
     public bool IsHitting;
@@ -35,6 +37,7 @@ public class animatorscript : MonoBehaviour
                 animator.SetBool("IsMoving",false);
             }
         }
+       
 
     }
 
