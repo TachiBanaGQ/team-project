@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemymove : MonoBehaviour
 {
     [SerializeField] private Transform Player;
-   
+
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private int facingDirection = -1;
 
@@ -39,6 +37,15 @@ public class Enemymove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(enemyState == newState)
+        {
+            ChangeState(EnemyState.Moving);
+            
+        }
+        else
+        {
+            ChangeState(EnemyState.Idle);
+        }
 
         if (Player.position.x > transform.position.x && facingDirection == -1 || Player.position.x < transform.position.x && facingDirection == 1)
         {
@@ -56,13 +63,13 @@ public class Enemymove : MonoBehaviour
 
         if (!Flee)
         {
-            transform.position = Vector2.MoveTowards(transform.position, Player.position, ChaseSpeed * Time.deltaTime );
-           
+            transform.position = Vector2.MoveTowards(transform.position, Player.position, ChaseSpeed * Time.deltaTime);
+
         }
         else
         {
             if (distance > ReturnDistance) Flee = false;
-            transform.position = Vector2.MoveTowards(transform.position, Player.position, -1 * ChaseSpeed * Time.deltaTime );
+            transform.position = Vector2.MoveTowards(transform.position, Player.position, -1 * ChaseSpeed * Time.deltaTime);
         }
 
 
@@ -87,7 +94,7 @@ public class Enemymove : MonoBehaviour
         {
             Player = other.transform;
             Debug.Log("load");
-      
+
             ChangeState(EnemyState.Moving);
         }
     }
@@ -100,7 +107,7 @@ public class Enemymove : MonoBehaviour
             ChangeState(EnemyState.Idle);
         }
     }
-   
+
     /// <summary>
     /// Getter
     /// </summary>
@@ -123,7 +130,7 @@ public class Enemymove : MonoBehaviour
         //Exit the current animation
         switch (enemyState)
         {
-           
+
             case EnemyState.Moving:
                 anim.SetBool("IsMoving", true);
                 break;
@@ -149,7 +156,7 @@ public class Enemymove : MonoBehaviour
             anim.SetBool("IsHurting", false);
             anim.SetBool("IsIdle", true);
 
-        } 
+        }
 
         Debug.Log("checking to see if this works in the update loop");
     }
