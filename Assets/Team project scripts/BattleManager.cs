@@ -80,10 +80,13 @@ public class BattleManager : MonoBehaviour
         enemyHUD.SetHP(enemyUnit.currentHP);
         dialogueText.text = "You hit the enemy!";
 
-        //call hurt function for hit enemy
+        //call player attack anim
+        //call enemy hurt anim
 
         yield return new WaitForSeconds(2f);
 
+        //call player idle anim
+        
         if (isDead)
         {
             state = BattleState.WON;
@@ -91,11 +94,11 @@ public class BattleManager : MonoBehaviour
         }
         else
         {
-            //return enemy back to idle
+            //call enemy idle anim
             state = BattleState.ENEMYTURN;
             StartCoroutine(EnemyTurn());
         }
-        //Change State
+        
     }
 
     IEnumerator PlayerHeal()
@@ -127,7 +130,12 @@ public class BattleManager : MonoBehaviour
                 playerHUD.SetHP(playerUnit.currentHP);
                 enemyHUD.SetHP(enemyUnit.currentHP);
 
+                //call enemy attack anim
+                //call player hurt anim
+
                 yield return new WaitForSeconds(1f);
+
+                //call enemy idle anim
 
                 if (isDead)
                 {
@@ -136,6 +144,7 @@ public class BattleManager : MonoBehaviour
                 }
                 else
                 {
+                    //call player idle anim
                     state = BattleState.PLAYERTURN;
                     PlayerTurn();
                 }
@@ -147,8 +156,10 @@ public class BattleManager : MonoBehaviour
 
                 bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
 
-
                 playerHUD.SetHP(playerUnit.currentHP);
+
+                //call enemy attack anim
+                //call player hurt anim
 
                 yield return new WaitForSeconds(1f);
 
@@ -159,6 +170,7 @@ public class BattleManager : MonoBehaviour
                 }
                 else
                 {
+                    //call player idle anim
                     state = BattleState.PLAYERTURN;
                     PlayerTurn();
                 }
@@ -172,6 +184,8 @@ public class BattleManager : MonoBehaviour
 
             bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
 
+            //call enemy attack anim
+            //call player hurt anim
 
             playerHUD.SetHP(playerUnit.currentHP);
 
@@ -184,6 +198,7 @@ public class BattleManager : MonoBehaviour
             }
             else
             {
+                //call player idle anim
                 state = BattleState.PLAYERTURN;
                 PlayerTurn();
             }
@@ -196,10 +211,15 @@ public class BattleManager : MonoBehaviour
         {
             dialogueText.text = "You win! Yay!";
             yield return new WaitForSeconds(5f);
-            battleHUD.SetActive(false);
+
+            Object.Destroy(playerAct);
+            Object.Destroy(enemyAct);
+            Object.Destroy(enemyGO);
 
             playerGO.SetActive(true);
-            
+
+            battleHUD.SetActive(false);
+
 
         } else if(state == BattleState.LOST)
         {
