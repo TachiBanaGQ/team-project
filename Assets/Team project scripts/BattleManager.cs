@@ -19,6 +19,9 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private HpHud playerHUD;
     [SerializeField] private HpHud enemyHUD;
 
+    Enemymove enemymove;
+    PlayerAction playeraction;
+
     private GameObject playerGO;
     private GameObject enemyGO;
     private GameObject playerAct;
@@ -39,7 +42,8 @@ public class BattleManager : MonoBehaviour
     {
         battleHUD.SetActive(false);
         state = BattleState.INACTIVE;
-        
+        enemymove = GetComponent < Enemymove>();
+        playeraction = GetComponent < PlayerAction>();
     }
 
     public void LaunchBattle(GameObject player, GameObject enemy)
