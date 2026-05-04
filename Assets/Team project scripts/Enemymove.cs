@@ -32,20 +32,22 @@ public class Enemymove : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         ChangeState(EnemyState.Idle);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(enemyState == newState)
+        Debug.Log("test");
+
+        if (enemyState != newState)
         {
-            ChangeState(EnemyState.Moving);
             
+            ChangeState(newState);
+            UpdateAnimatior();
+            Debug.Log(enemyState.ToString());
         }
-        else
-        {
-            ChangeState(EnemyState.Idle);
-        }
+
 
         if (Player.position.x > transform.position.x && facingDirection == -1 || Player.position.x < transform.position.x && facingDirection == 1)
         {
@@ -73,7 +75,7 @@ public class Enemymove : MonoBehaviour
         }
 
 
-        UpdateAnimatior();
+
     }
 
 
@@ -88,15 +90,17 @@ public class Enemymove : MonoBehaviour
 
 
     private void OnTriggerEnter2D(Collider2D other)
-    {
+    { 
+
         Debug.Log("Trying to on trigger enter");
         if (other.CompareTag("Player"))
         {
             Player = other.transform;
             Debug.Log("load");
-
-            ChangeState(EnemyState.Moving);
+            newState = EnemyState.Moving;
+            //ChangeState(EnemyState.Moving);
         }
+        
     }
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -104,7 +108,8 @@ public class Enemymove : MonoBehaviour
         {
 
             rb.linearVelocity = Vector2.zero;
-            ChangeState(EnemyState.Idle);
+            newState = EnemyState.Idle;
+            //ChangeState(EnemyState.Idle);
         }
     }
 
