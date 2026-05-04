@@ -459,6 +459,9 @@ MonoBehaviour:
   enemyHUD: {fileID: 436242588}
   dialogueText: {fileID: 1001947198}
   battleHUD: {fileID: 1421840432}
+  _currentState: 
+  enemyState: 0
+  newState: 0
   state: 0
 --- !u!1 &655671545
 GameObject:
@@ -1043,6 +1046,9 @@ MonoBehaviour:
   enemyHUD: {fileID: 0}
   dialogueText: {fileID: 0}
   battleHUD: {fileID: 0}
+  _currentState: 
+  enemyState: 0
+  newState: 0
   state: 0
 --- !u!4 &1507529671
 Transform:
@@ -2083,7 +2089,7 @@ GameObject:
   - component: {fileID: 7712096149249596034}
   - component: {fileID: 7712096149249596035}
   m_Layer: 0
-  m_Name: EnemyE
+  m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

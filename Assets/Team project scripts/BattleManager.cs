@@ -1,12 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.XR;
 
 
-public enum BattleState {INACTIVE, START, PLAYERTURN, ENEMYTURN, WON, LOST}
+public enum BattleState { INACTIVE, START, PLAYERTURN, ENEMYTURN, WON, LOST }
 
 public class BattleManager : MonoBehaviour
 {
@@ -34,16 +32,19 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private GameObject battleHUD;
 
-
-
+    [SerializeField] public string _currentState;
+    [SerializeField] private EnemyState enemyState, newState;
     public BattleState state;
 
     void Start()
     {
         battleHUD.SetActive(false);
         state = BattleState.INACTIVE;
-        enemymove = GetComponent < Enemymove>();
-        playeraction = GetComponent < PlayerAction>();
+
+        _currentState = "Idle";
+        ChangeState(EnemyState.Idle);
+        enemymove = GetComponent<Enemymove>();
+        playeraction = GetComponent<PlayerAction>();
     }
 
     public void LaunchBattle(GameObject player, GameObject enemy)
@@ -58,8 +59,8 @@ public class BattleManager : MonoBehaviour
     IEnumerator SetupBattle()
     {
         battleHUD.SetActive(true);
-       
-        playerAct =  Instantiate(playerPrefab, playerCoordinate);
+
+        playerAct = Instantiate(playerPrefab, playerCoordinate);
         playerUnit = playerAct.GetComponent<Unit>();
 
         enemyAct = Instantiate(enemyPrefab, enemyCoordinate);
@@ -85,12 +86,22 @@ public class BattleManager : MonoBehaviour
         dialogueText.text = "You hit the enemy!";
 
         //call player attack anim
+        if (playeraction.IsHitting())
+        {
+            _currentState = "Hitting";
+
+        }
+        else
+        {
+            _currentState = "Idle";
+        }
         //call enemy hurt anim
+        //if(enemy health <-1){ newState = EnemyState.Hurting;) }
 
         yield return new WaitForSeconds(2f);
 
         //call player idle anim
-        
+
         if (isDead)
         {
             state = BattleState.WON;
@@ -102,7 +113,7 @@ public class BattleManager : MonoBehaviour
             state = BattleState.ENEMYTURN;
             StartCoroutine(EnemyTurn());
         }
-        
+
     }
 
     IEnumerator PlayerHeal()
@@ -225,7 +236,8 @@ public class BattleManager : MonoBehaviour
             battleHUD.SetActive(false);
 
 
-        } else if(state == BattleState.LOST)
+        }
+        else if (state == BattleState.LOST)
         {
             dialogueText.text = "You lost...";
             yield return new WaitForSeconds(10f);
@@ -257,5 +269,10 @@ public class BattleManager : MonoBehaviour
         }
 
         StartCoroutine(PlayerHeal());
+    }
+
+    public void ChangeState(EnemyState newState)
+    {
+        enemyState = newState;
     }
 }
