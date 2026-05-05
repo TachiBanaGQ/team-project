@@ -21,7 +21,7 @@ public class Enemymove : MonoBehaviour
 
     [SerializeField] bool Flee = false;
 
-    [SerializeField] private float gridSize = 1f;
+    
     [SerializeField] private BattleManager bm;
     [SerializeField] private Animator anim;
 
