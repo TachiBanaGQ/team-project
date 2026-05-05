@@ -31,6 +31,8 @@ public class BattleManager : MonoBehaviour
 
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private GameObject battleHUD;
+    [SerializeField] private GameObject atkButton;
+    [SerializeField] private GameObject healButton;
 
     [SerializeField] public string _currentState;
     [SerializeField] private EnemyState enemyState, newState;
@@ -143,7 +145,7 @@ public class BattleManager : MonoBehaviour
             int crit = Random.Range(0, 4);
             if (crit == 4)
             {
-                dialogueText.text = $"{enemyUnit.name} uses a draining attack!";
+                dialogueText.text = $"{enemyUnit.unitName} uses a draining attack!";
                 yield return new WaitForSeconds(1f);
 
                 bool isDead = playerUnit.TakeDamage(enemyUnit.ultraDamage);
@@ -177,7 +179,7 @@ public class BattleManager : MonoBehaviour
             }
             else
             {
-                dialogueText.text = $"{enemyUnit.name} attacks!";
+                dialogueText.text = $"{enemyUnit.unitName} attacks!";
                 yield return new WaitForSeconds(1f);
 
                 bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
@@ -209,7 +211,7 @@ public class BattleManager : MonoBehaviour
 
         else
         {
-            dialogueText.text = $"{enemyUnit.name} attacks!";
+            dialogueText.text = $"{enemyUnit.unitName} attacks!";
             yield return new WaitForSeconds(1f);
 
             bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
@@ -267,9 +269,17 @@ public class BattleManager : MonoBehaviour
     void PlayerTurn()
     {
         dialogueText.text = "Choose an action:";
-
+        IsButtonsActive(true);
     }
+    void IsButtonsActive(bool state)
+    {
+        if (state == true)
+        {
+            atkButton.SetActive(true);
+            healButton.SetActive(true);
 
+        }
+    }
     public void OnAttackButton()
     {
         if (state != BattleState.PLAYERTURN)
