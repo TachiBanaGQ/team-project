@@ -1,7 +1,6 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.XR;
 
 
 public enum BattleState { INACTIVE, START, PLAYERTURN, ENEMYTURN, WON, LOST }
@@ -17,7 +16,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private HpHud playerHUD;
     [SerializeField] private HpHud enemyHUD;
 
-    Enemymove enemymove;
+    [SerializeField] Enemymove enemymove;
     PlayerAction playeraction;
 
     private GameObject playerGO;
@@ -44,9 +43,9 @@ public class BattleManager : MonoBehaviour
         state = BattleState.INACTIVE;
 
         _currentState = "Idle";
-        ChangeState(EnemyState.Idle);
-        enemymove = GetComponent<Enemymove>();
-        playeraction = GetComponent<PlayerAction>();
+        newState = EnemyState.Idle;
+       
+
     }
 
     private void Update()
@@ -55,6 +54,7 @@ public class BattleManager : MonoBehaviour
         {
 
             ChangeState(newState);
+            
             Debug.Log(enemyState.ToString());
         }
     }
@@ -75,8 +75,12 @@ public class BattleManager : MonoBehaviour
         playerAct = Instantiate(playerPrefab, playerCoordinate);
         playerUnit = playerAct.GetComponent<Unit>();
 
+        playeraction = playerAct.GetComponent<PlayerAction>();
+
         enemyAct = Instantiate(enemyPrefab, enemyCoordinate);
         enemyUnit = enemyAct.GetComponent<Unit>();
+
+        enemymove = enemyAct.GetComponent <Enemymove>();
 
         dialogueText.text = $"{enemyUnit.unitName} appears!";
 
@@ -98,10 +102,10 @@ public class BattleManager : MonoBehaviour
         dialogueText.text = "You hit the enemy!";
 
         //call player attack anim
-            _currentState = "Hitting";
+        _currentState = "Hitting";
 
-        
-     
+
+
         //call enemy hurt anim
         newState = EnemyState.Hurting;
         //if(enemy health <-1){ newState = EnemyState.Hurting;) }
@@ -157,7 +161,9 @@ public class BattleManager : MonoBehaviour
                 //call enemy attack anim
                 newState = EnemyState.Hitting;
                 //call player hurt anim
-                _currentState = "hurting";
+               
+                    _currentState = "hurting";
+
 
                 yield return new WaitForSeconds(1f);
 
@@ -202,7 +208,7 @@ public class BattleManager : MonoBehaviour
                 {
                     //call player idle anim
                     _currentState = "Idle";
-                    
+
                     state = BattleState.PLAYERTURN;
                     PlayerTurn();
                 }

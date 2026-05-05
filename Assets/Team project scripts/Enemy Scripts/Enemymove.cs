@@ -134,7 +134,7 @@ public class Enemymove : MonoBehaviour
     {
         enemyState = newState;
     }
-    private void UpdateAnimatior()
+    public void UpdateAnimatior()
     {
         //Exit the current animation
         switch (enemyState)
