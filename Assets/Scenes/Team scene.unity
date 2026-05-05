@@ -584,6 +584,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1421840433}
     m_Modifications:
+    - target: {fileID: 6603236404746240853, guid: a785b94f58b32fd48a56cd0f403adae1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 597871032}
+    - target: {fileID: 6603236404746240853, guid: a785b94f58b32fd48a56cd0f403adae1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnAttackButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 6603236404746240853, guid: a785b94f58b32fd48a56cd0f403adae1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BattleManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 6994574140530759045, guid: a785b94f58b32fd48a56cd0f403adae1, type: 3}
       propertyPath: m_Name
       value: DialogHUD
@@ -591,6 +603,18 @@ PrefabInstance:
     - target: {fileID: 7782815904325385314, guid: a785b94f58b32fd48a56cd0f403adae1, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8432913313331879250, guid: a785b94f58b32fd48a56cd0f403adae1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 597871032}
+    - target: {fileID: 8432913313331879250, guid: a785b94f58b32fd48a56cd0f403adae1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnHealButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 8432913313331879250, guid: a785b94f58b32fd48a56cd0f403adae1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BattleManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8665006065212084798, guid: a785b94f58b32fd48a56cd0f403adae1, type: 3}
       propertyPath: m_Pivot.x
@@ -2169,7 +2193,6 @@ MonoBehaviour:
   StopDistance: 0.2
   ReturnDistance: 0.5
   Flee: 0
-  gridSize: 1
   bm: {fileID: 597871032}
   anim: {fileID: 7712096149249596029}
 --- !u!114 &8212447338264769222
