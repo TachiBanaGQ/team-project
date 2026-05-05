@@ -462,7 +462,7 @@ MonoBehaviour:
   enemyCoordinate: {fileID: 1959438950}
   playerHUD: {fileID: 1393856471}
   enemyHUD: {fileID: 436242588}
-  enemymove: {fileID: 0}
+  enemymove: {fileID: 7712096149249596035}
   dialogueText: {fileID: 1001947198}
   battleHUD: {fileID: 1421840432}
   atkButton: {fileID: 250711127}
