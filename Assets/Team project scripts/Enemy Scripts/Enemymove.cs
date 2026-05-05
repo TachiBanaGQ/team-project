@@ -38,7 +38,7 @@ public class Enemymove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("test");
+        
 
         if (enemyState != newState)
         {

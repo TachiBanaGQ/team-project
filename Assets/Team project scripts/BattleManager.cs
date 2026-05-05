@@ -96,15 +96,10 @@ public class BattleManager : MonoBehaviour
         dialogueText.text = "You hit the enemy!";
 
         //call player attack anim
-        if (playeraction.IsHitting())
-        {
             _currentState = "Hitting";
 
-        }
-        else
-        {
-            _currentState = "Idle";
-        }
+        
+     
         //call enemy hurt anim
         newState = EnemyState.Hurting;
         //if(enemy health <-1){ newState = EnemyState.Hurting;) }
