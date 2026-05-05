@@ -456,17 +456,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b407be9a6a4f814f99428f4555de383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 8871748559971241241, guid: 5397e3d914bf86e4a9a19174f3e74e1b, type: 3}
-  enemyPrefab: {fileID: 2496282177086026380, guid: ebe5e30036fad3341b67375db35f3c06, type: 3}
+  playerPrefab: {fileID: 6259136981827913696, guid: 5397e3d914bf86e4a9a19174f3e74e1b, type: 3}
+  enemyPrefab: {fileID: 6632256814095566522, guid: ebe5e30036fad3341b67375db35f3c06, type: 3}
   playerCoordinate: {fileID: 585587873}
   enemyCoordinate: {fileID: 1959438950}
   playerHUD: {fileID: 1393856471}
   enemyHUD: {fileID: 436242588}
+  enemymove: {fileID: 0}
   dialogueText: {fileID: 1001947198}
   battleHUD: {fileID: 1421840432}
   atkButton: {fileID: 250711127}
   healButton: {fileID: 696986715}
-  _currentState: 
+  playerState: 0
+  neoState: 0
   enemyState: 0
   newState: 0
   state: 0
@@ -1188,11 +1190,13 @@ MonoBehaviour:
   enemyCoordinate: {fileID: 0}
   playerHUD: {fileID: 0}
   enemyHUD: {fileID: 0}
+  enemymove: {fileID: 0}
   dialogueText: {fileID: 0}
   battleHUD: {fileID: 0}
   atkButton: {fileID: 0}
   healButton: {fileID: 0}
-  _currentState: 
+  playerState: 0
+  neoState: 0
   enemyState: 0
   newState: 0
   state: 0
@@ -2308,7 +2312,6 @@ MonoBehaviour:
   facingDirection: -1
   enemyState: 0
   newState: 0
-  _currentState: 
   _direction: {x: 0, y: 0}
   ChaseSpeed: 0.5
   AggroDist: 2

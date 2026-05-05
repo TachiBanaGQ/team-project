@@ -33,7 +33,8 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private GameObject atkButton;
     [SerializeField] private GameObject healButton;
 
-    [SerializeField] public string _currentState;
+
+    [SerializeField] private PlayerState playerState, neoState;
     [SerializeField] private EnemyState enemyState, newState;
     public BattleState state;
 
@@ -42,9 +43,9 @@ public class BattleManager : MonoBehaviour
         battleHUD.SetActive(false);
         state = BattleState.INACTIVE;
 
-        _currentState = "Idle";
+        neoState = PlayerState.Idle;
         newState = EnemyState.Idle;
-       
+
 
     }
 
@@ -54,8 +55,16 @@ public class BattleManager : MonoBehaviour
         {
 
             ChangeState(newState);
-            
+
             Debug.Log(enemyState.ToString());
+        }
+
+        if (playerState != neoState)
+        {
+
+            ChangeState(neoState);
+
+            Debug.Log(playerState.ToString());
         }
     }
 
@@ -80,7 +89,7 @@ public class BattleManager : MonoBehaviour
         enemyAct = Instantiate(enemyPrefab, enemyCoordinate);
         enemyUnit = enemyAct.GetComponent<Unit>();
 
-        enemymove = enemyAct.GetComponent <Enemymove>();
+        enemymove = enemyAct.GetComponent<Enemymove>();
 
         dialogueText.text = $"{enemyUnit.unitName} appears!";
 
@@ -102,7 +111,8 @@ public class BattleManager : MonoBehaviour
         dialogueText.text = "You hit the enemy!";
 
         //call player attack anim
-        _currentState = "Hitting";
+
+        neoState = PlayerState.Hitting;
 
 
 
@@ -113,7 +123,7 @@ public class BattleManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         //call player idle anim
-        _currentState = "Idle";
+        neoState = PlayerState.Idle;
 
         if (isDead)
         {
@@ -161,8 +171,8 @@ public class BattleManager : MonoBehaviour
                 //call enemy attack anim
                 newState = EnemyState.Hitting;
                 //call player hurt anim
-               
-                    _currentState = "hurting";
+
+                neoState = PlayerState.Idle;
 
 
                 yield return new WaitForSeconds(1f);
@@ -178,7 +188,7 @@ public class BattleManager : MonoBehaviour
                 else
                 {
                     //call player idle anim
-                    _currentState = "Idle";
+                    neoState = PlayerState.Idle;
                     state = BattleState.PLAYERTURN;
                     PlayerTurn();
                 }
@@ -195,7 +205,7 @@ public class BattleManager : MonoBehaviour
                 //call enemy attack anim
                 newState = EnemyState.Hitting;
                 //call player hurt anim
-                _currentState = "Hurting";
+                neoState = PlayerState.Hurting; 
 
                 yield return new WaitForSeconds(1f);
 
@@ -207,7 +217,7 @@ public class BattleManager : MonoBehaviour
                 else
                 {
                     //call player idle anim
-                    _currentState = "Idle";
+                    neoState = PlayerState.Idle;
 
                     state = BattleState.PLAYERTURN;
                     PlayerTurn();
@@ -226,7 +236,7 @@ public class BattleManager : MonoBehaviour
             newState = EnemyState.Hitting;
 
             //call player hurt anim
-            _currentState = "Hurting";
+            neoState = PlayerState.Hurting;
 
             playerHUD.SetHP(playerUnit.currentHP);
 
@@ -240,7 +250,7 @@ public class BattleManager : MonoBehaviour
             else
             {
                 //call player idle anim
-                _currentState = "Idle";
+                neoState = PlayerState.Idle;
                 state = BattleState.PLAYERTURN;
                 PlayerTurn();
             }
@@ -309,5 +319,10 @@ public class BattleManager : MonoBehaviour
     public void ChangeState(EnemyState newState)
     {
         enemyState = newState;
+    }
+
+    public void ChangeState(PlayerState neoState)
+    {
+        playerState = neoState;
     }
 }

@@ -9,7 +9,7 @@ public class Enemymove : MonoBehaviour
     [SerializeField] private int facingDirection = -1;
 
     [SerializeField] private EnemyState enemyState, newState;
-    [SerializeField] public string _currentState;
+   
     [SerializeField] Vector2 _direction;
 
     [SerializeField] float ChaseSpeed;
