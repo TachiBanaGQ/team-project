@@ -47,6 +47,16 @@ public class BattleManager : MonoBehaviour
         playeraction = GetComponent<PlayerAction>();
     }
 
+    private void Update()
+    {
+        if (enemyState != newState)
+        {
+
+            ChangeState(newState);
+            Debug.Log(enemyState.ToString());
+        }
+    }
+
     public void LaunchBattle(GameObject player, GameObject enemy)
     {
         playerGO = player;
@@ -96,11 +106,13 @@ public class BattleManager : MonoBehaviour
             _currentState = "Idle";
         }
         //call enemy hurt anim
+        newState = EnemyState.Hurting;
         //if(enemy health <-1){ newState = EnemyState.Hurting;) }
 
         yield return new WaitForSeconds(2f);
 
         //call player idle anim
+        _currentState = "Idle";
 
         if (isDead)
         {
@@ -146,11 +158,14 @@ public class BattleManager : MonoBehaviour
                 enemyHUD.SetHP(enemyUnit.currentHP);
 
                 //call enemy attack anim
+                newState = EnemyState.Hitting;
                 //call player hurt anim
+                _currentState = "hurting";
 
                 yield return new WaitForSeconds(1f);
 
                 //call enemy idle anim
+                newState = EnemyState.Idle;
 
                 if (isDead)
                 {
@@ -160,6 +175,7 @@ public class BattleManager : MonoBehaviour
                 else
                 {
                     //call player idle anim
+                    _currentState = "Idle";
                     state = BattleState.PLAYERTURN;
                     PlayerTurn();
                 }
@@ -174,7 +190,9 @@ public class BattleManager : MonoBehaviour
                 playerHUD.SetHP(playerUnit.currentHP);
 
                 //call enemy attack anim
+                newState = EnemyState.Hitting;
                 //call player hurt anim
+                _currentState = "Hurting";
 
                 yield return new WaitForSeconds(1f);
 
@@ -186,6 +204,8 @@ public class BattleManager : MonoBehaviour
                 else
                 {
                     //call player idle anim
+                    _currentState = "Idle";
+                    
                     state = BattleState.PLAYERTURN;
                     PlayerTurn();
                 }
@@ -200,7 +220,10 @@ public class BattleManager : MonoBehaviour
             bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
 
             //call enemy attack anim
+            newState = EnemyState.Hitting;
+
             //call player hurt anim
+            _currentState = "Hurting";
 
             playerHUD.SetHP(playerUnit.currentHP);
 
@@ -214,6 +237,7 @@ public class BattleManager : MonoBehaviour
             else
             {
                 //call player idle anim
+                _currentState = "Idle";
                 state = BattleState.PLAYERTURN;
                 PlayerTurn();
             }

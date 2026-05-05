@@ -4,7 +4,7 @@ using UnityEngine;
 public class Enemymove : MonoBehaviour
 {
     [SerializeField] private Transform Player;
-
+    [SerializeField] GameObject enemy;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private int facingDirection = -1;
 
@@ -22,7 +22,7 @@ public class Enemymove : MonoBehaviour
     [SerializeField] bool Flee = false;
 
     [SerializeField] private float gridSize = 1f;
-
+    [SerializeField] private BattleManager bm;
     [SerializeField] private Animator anim;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -89,22 +89,26 @@ public class Enemymove : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collision)
     { 
 
         Debug.Log("Trying to on trigger enter");
-        if (other.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
-            Player = other.transform;
+            Player = collision.transform;
             Debug.Log("load");
             newState = EnemyState.Moving;
             //ChangeState(EnemyState.Moving);
         }
-        
+
+        if (collision.CompareTag("Encounter"))
+        {
+            bm.LaunchBattle(enemy, collision.gameObject);
+        }
     }
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (other.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
 
             rb.linearVelocity = Vector2.zero;

@@ -2157,6 +2157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 1634297829250761359}
+  enemy: {fileID: 7009024040533723787}
   rb: {fileID: 7712096149249596034}
   facingDirection: -1
   enemyState: 0
@@ -2169,6 +2170,7 @@ MonoBehaviour:
   ReturnDistance: 0.5
   Flee: 0
   gridSize: 1
+  bm: {fileID: 597871032}
   anim: {fileID: 7712096149249596029}
 --- !u!114 &8212447338264769222
 MonoBehaviour:
