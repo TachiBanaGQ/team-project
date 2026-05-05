@@ -32,7 +32,7 @@ public class PlayerAction : MonoBehaviour
     {
         if (collision.CompareTag("Encounter"))
         {
-            bm.LaunchBattle(player, collision.gameObject);
+            bm.LaunchBattle(player, collision.transform.parent.gameObject);
         }
     }
 
