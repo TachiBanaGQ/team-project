@@ -98,7 +98,7 @@ public class Enemymove : MonoBehaviour
             Player = collision.transform;
             Debug.Log("load");
             newState = EnemyState.Moving;
-            //ChangeState(EnemyState.Moving);
+            
         }
 
         if (collision.CompareTag("Encounter"))
@@ -113,7 +113,7 @@ public class Enemymove : MonoBehaviour
 
             rb.linearVelocity = Vector2.zero;
             newState = EnemyState.Idle;
-            //ChangeState(EnemyState.Idle);
+           
         }
     }
 

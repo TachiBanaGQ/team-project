@@ -451,8 +451,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b407be9a6a4f814f99428f4555de383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 6723262089538617207, guid: c0a548712b46fca4e9e4ad49e5b5c922, type: 3}
-  enemyPrefab: {fileID: 288259477889871945, guid: 14cf5a86cfdfa0044990b2952c8ce9df, type: 3}
+  playerPrefab: {fileID: 8871748559971241241, guid: 5397e3d914bf86e4a9a19174f3e74e1b, type: 3}
+  enemyPrefab: {fileID: 2496282177086026380, guid: ebe5e30036fad3341b67375db35f3c06, type: 3}
   playerCoordinate: {fileID: 585587873}
   enemyCoordinate: {fileID: 1959438950}
   playerHUD: {fileID: 1393856471}

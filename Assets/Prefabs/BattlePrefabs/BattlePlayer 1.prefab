@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1638512219251466548
+--- !u!1 &8871748559971241241
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5947838840156866192}
-  - component: {fileID: 9169857700723763555}
-  - component: {fileID: 3005509149267166149}
-  - component: {fileID: 5474057468579165295}
-  - component: {fileID: 5384250731845934778}
+  - component: {fileID: 8109983712044908296}
+  - component: {fileID: 4571722773271299281}
+  - component: {fileID: 8926283040843787498}
+  - component: {fileID: 8783765944825329591}
+  - component: {fileID: 6690930086684566331}
   m_Layer: 0
-  m_Name: player
+  m_Name: BattlePlayer 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5947838840156866192
+--- !u!4 &8109983712044908296
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1638512219251466548}
+  m_GameObject: {fileID: 8871748559971241241}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.53, y: -3.395, z: 0}
-  m_LocalScale: {x: 3.388342, y: 3.388342, z: 3.388342}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 8, y: 8, z: 3.388342}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &9169857700723763555
+--- !u!212 &4571722773271299281
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1638512219251466548}
+  m_GameObject: {fileID: 8871748559971241241}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -90,14 +90,14 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &3005509149267166149
+--- !u!95 &8926283040843787498
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1638512219251466548}
+  m_GameObject: {fileID: 8871748559971241241}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: c730fda35e4df2042a7a16385197904c, type: 2}
@@ -112,13 +112,13 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5474057468579165295
+--- !u!114 &8783765944825329591
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1638512219251466548}
+  m_GameObject: {fileID: 8871748559971241241}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc44406a908f517408dbc9b8b3e4365b, type: 3}
@@ -127,31 +127,27 @@ MonoBehaviour:
   unitName: 'Player guy '
   unitLevel: 2
   damage: 2
-  ultraDamage: 0
-  healDamage: 0
+  ultraDamage: 9999
+  healDamage: 3
   maxHp: 10
   currentHP: 10
---- !u!114 &5384250731845934778
+--- !u!114 &6690930086684566331
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1638512219251466548}
+  m_GameObject: {fileID: 8871748559971241241}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf90e81622dd4544aaf18bfeddfad9bc, type: 3}
+  m_Script: {fileID: 11500000, guid: e0276359477f3b84cba57a4ddc1bcfc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRepeatedMovement: 0
-  moveDuration: 1
-  gridSize: 1
-  move:
-    m_Name: Move
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 4033f6d2-ab55-4875-852b-0dbbae9ad87b
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
+  playeraction: {fileID: 0}
+  Guy: {fileID: 0}
+  animator: {fileID: 8926283040843787498}
+  Idle: 0
+  IsMoving: 0
+  IsHitting: 0
+  IsHurting: 0
+  syncAnimator: 1
