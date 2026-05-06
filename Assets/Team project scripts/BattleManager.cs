@@ -124,12 +124,13 @@ public class BattleManager : MonoBehaviour
 
         //call enemy hurt anim
         newState = EnemyState.Hurting;
-        //if(enemy health <-1){ newState = EnemyState.Hurting;) }
+
 
         yield return new WaitForSeconds(2f);
 
         //call player idle anim
         neoState = PlayerState.Idle;
+        newState = EnemyState.Idle;
 
         if (isDead)
         {
@@ -168,8 +169,6 @@ public class BattleManager : MonoBehaviour
                 dialogueText.text = $"{enemyUnit.unitName} uses a draining attack!";
                 yield return new WaitForSeconds(1f);
 
-                neoState = PlayerState.Idle;
-                newState = EnemyState.Idle;
 
                 bool isDead = playerUnit.TakeDamage(enemyUnit.ultraDamage);
                 enemyUnit.Heal(enemyUnit.healDamage);
@@ -188,6 +187,7 @@ public class BattleManager : MonoBehaviour
 
                 //call enemy idle anim
                 newState = EnemyState.Idle;
+                neoState = PlayerState.Idle;
 
                 if (isDead)
                 {
@@ -207,8 +207,7 @@ public class BattleManager : MonoBehaviour
                 dialogueText.text = $"{enemyUnit.unitName} attacks!";
                 yield return new WaitForSeconds(1f);
 
-                neoState = PlayerState.Idle;
-                newState = EnemyState.Idle;
+
 
                 bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
 
@@ -217,9 +216,11 @@ public class BattleManager : MonoBehaviour
                 //call enemy attack anim
                 newState = EnemyState.Hitting;
                 //call player hurt anim
-                neoState = PlayerState.Hurting; 
+                neoState = PlayerState.Hurting;
 
                 yield return new WaitForSeconds(1f);
+                neoState = PlayerState.Idle;
+                newState = EnemyState.Idle;
 
                 if (isDead)
                 {
@@ -242,8 +243,7 @@ public class BattleManager : MonoBehaviour
             dialogueText.text = $"{enemyUnit.unitName} attacks!";
             yield return new WaitForSeconds(1f);
 
-            neoState = PlayerState.Idle;
-            newState = EnemyState.Idle;
+
 
             bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
 
@@ -256,6 +256,8 @@ public class BattleManager : MonoBehaviour
             playerHUD.SetHP(playerUnit.currentHP);
 
             yield return new WaitForSeconds(1f);
+            neoState = PlayerState.Idle;
+            newState = EnemyState.Idle;
 
             if (isDead)
             {
@@ -318,7 +320,7 @@ public class BattleManager : MonoBehaviour
             return;
         }
 
-       
+
         StartCoroutine(PlayerAttack());
     }
 
@@ -339,7 +341,7 @@ public class BattleManager : MonoBehaviour
         {
 
             case PlayerState.Idle:
-                playerAnimator.SetTrigger("Idle");
+                playerAnimator.SetTrigger("IsIdle");
                 break;
 
             case PlayerState.Hitting:
@@ -350,7 +352,7 @@ public class BattleManager : MonoBehaviour
                 playerAnimator.SetTrigger("IsHurting");
                 break;
 
-           
+
         }
     }
 
@@ -362,7 +364,7 @@ public class BattleManager : MonoBehaviour
         {
 
             case EnemyState.Idle:
-                playerAnimator.SetTrigger("Idle");
+                enemyAnimator.SetTrigger("IsIdle");
                 break;
             case EnemyState.Hitting:
                 enemyAnimator.SetTrigger("IsHitting");
@@ -387,3 +389,4 @@ public class BattleManager : MonoBehaviour
         PlayPlayerAnimation(neoState);
     }
 }
+
