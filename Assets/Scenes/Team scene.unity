@@ -462,6 +462,8 @@ MonoBehaviour:
   enemyCoordinate: {fileID: 1959438950}
   playerHUD: {fileID: 1393856471}
   enemyHUD: {fileID: 436242588}
+  playerAnimator: {fileID: 2759736520063547887}
+  enemyAnimator: {fileID: 7712096149249596029}
   enemymove: {fileID: 7712096149249596035}
   dialogueText: {fileID: 1001947198}
   battleHUD: {fileID: 1421840432}
@@ -1190,6 +1192,8 @@ MonoBehaviour:
   enemyCoordinate: {fileID: 0}
   playerHUD: {fileID: 0}
   enemyHUD: {fileID: 0}
+  playerAnimator: {fileID: 0}
+  enemyAnimator: {fileID: 0}
   enemymove: {fileID: 0}
   dialogueText: {fileID: 0}
   battleHUD: {fileID: 0}

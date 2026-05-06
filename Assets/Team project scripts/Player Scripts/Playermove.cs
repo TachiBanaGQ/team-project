@@ -80,10 +80,7 @@ public class Playermove : MonoBehaviour
 
             }*/
         }
-        string GetState()
-        {
-            return _currentState;
-        }
+        
     }
 
    
