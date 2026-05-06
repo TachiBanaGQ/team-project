@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public enum BattleState { INACTIVE, START, PLAYERTURN, ENEMYTURN, WON, LOST }
@@ -37,8 +38,8 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private GameObject healButton;
 
 
-    [SerializeField] private PlayerState playerState, neoState;
-    [SerializeField] private EnemyState enemyState, newState;
+    [SerializeField] private PlayerState playerState;
+    [SerializeField] private EnemyState enemyState;
     public BattleState state;
 
     void Start()
@@ -46,30 +47,12 @@ public class BattleManager : MonoBehaviour
         battleHUD.SetActive(false);
         state = BattleState.INACTIVE;
 
-        neoState = PlayerState.Idle;
-        newState = EnemyState.Idle;
-
+        ChangeState(PlayerState.Idle);
+        ChangeState(EnemyState.Idle);
 
     }
 
-    private void Update()
-    {
-        if (enemyState != newState)
-        {
 
-            ChangeState((EnemyState)newState);
-
-            Debug.Log(enemyState.ToString());
-        }
-
-        if (playerState != neoState)
-        {
-
-            ChangeState((PlayerState)neoState);
-
-            Debug.Log(playerState.ToString());
-        }
-    }
 
     public void LaunchBattle(GameObject player, GameObject enemy)
     {
@@ -118,19 +101,18 @@ public class BattleManager : MonoBehaviour
 
         //call player attack anim
 
-        neoState = PlayerState.Hitting;
+        ChangeState(PlayerState.Hitting);
 
 
 
         //call enemy hurt anim
-        newState = EnemyState.Hurting;
-
+        ChangeState(EnemyState.Hurting);
 
         yield return new WaitForSeconds(2f);
 
         //call player idle anim
-        neoState = PlayerState.Idle;
-        newState = EnemyState.Idle;
+        ChangeState(PlayerState.Idle);
+        ChangeState(EnemyState.Idle);
 
         if (isDead)
         {
@@ -177,17 +159,17 @@ public class BattleManager : MonoBehaviour
                 enemyHUD.SetHP(enemyUnit.currentHP);
 
                 //call enemy attack anim
-                newState = EnemyState.Hitting;
-                //call player hurt anim
 
-                neoState = PlayerState.Idle;
+                ChangeState(EnemyState.Hitting);
+                //call player hurt anim
+                ChangeState(PlayerState.Hurting);
 
 
                 yield return new WaitForSeconds(1f);
 
                 //call enemy idle anim
-                newState = EnemyState.Idle;
-                neoState = PlayerState.Idle;
+                ChangeState(PlayerState.Idle);
+                ChangeState(EnemyState.Idle);
 
                 if (isDead)
                 {
@@ -197,7 +179,7 @@ public class BattleManager : MonoBehaviour
                 else
                 {
                     //call player idle anim
-                    neoState = PlayerState.Idle;
+                    ChangeState(PlayerState.Idle);
                     state = BattleState.PLAYERTURN;
                     PlayerTurn();
                 }
@@ -214,13 +196,15 @@ public class BattleManager : MonoBehaviour
                 playerHUD.SetHP(playerUnit.currentHP);
 
                 //call enemy attack anim
-                newState = EnemyState.Hitting;
+
+                ChangeState(EnemyState.Hitting);
                 //call player hurt anim
-                neoState = PlayerState.Hurting;
+
+                ChangeState(PlayerState.Hurting);
 
                 yield return new WaitForSeconds(1f);
-                neoState = PlayerState.Idle;
-                newState = EnemyState.Idle;
+                ChangeState(PlayerState.Idle);
+                ChangeState(EnemyState.Idle);
 
                 if (isDead)
                 {
@@ -230,7 +214,7 @@ public class BattleManager : MonoBehaviour
                 else
                 {
                     //call player idle anim
-                    neoState = PlayerState.Idle;
+                    ChangeState(PlayerState.Idle);
 
                     state = BattleState.PLAYERTURN;
                     PlayerTurn();
@@ -248,16 +232,17 @@ public class BattleManager : MonoBehaviour
             bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
 
             //call enemy attack anim
-            newState = EnemyState.Hitting;
+
+            ChangeState(EnemyState.Hitting);
 
             //call player hurt anim
-            neoState = PlayerState.Hurting;
+            ChangeState(PlayerState.Hurting);
 
             playerHUD.SetHP(playerUnit.currentHP);
 
             yield return new WaitForSeconds(1f);
-            neoState = PlayerState.Idle;
-            newState = EnemyState.Idle;
+            ChangeState(PlayerState.Idle);
+            ChangeState(EnemyState.Idle);
 
             if (isDead)
             {
@@ -267,7 +252,7 @@ public class BattleManager : MonoBehaviour
             else
             {
                 //call player idle anim
-                neoState = PlayerState.Idle;
+                ChangeState(PlayerState.Idle);
                 state = BattleState.PLAYERTURN;
                 PlayerTurn();
             }
@@ -296,6 +281,7 @@ public class BattleManager : MonoBehaviour
             dialogueText.text = "You lost...";
             yield return new WaitForSeconds(10f);
             //scene change main menu
+            LoadGameOverScene();
         }
     }
 
@@ -337,6 +323,11 @@ public class BattleManager : MonoBehaviour
     {
         if (playerAnimator == null) return;
 
+        // Reset all triggers first
+        playerAnimator.ResetTrigger("IsIdle");
+        playerAnimator.ResetTrigger("IsHitting");
+        playerAnimator.ResetTrigger("IsHurting");
+
         switch (state)
         {
 
@@ -359,6 +350,11 @@ public class BattleManager : MonoBehaviour
     void PlayEnemyAnimation(EnemyState state)
     {
         if (enemyAnimator == null) return;
+
+        enemyAnimator.ResetTrigger("IsIdle");
+        enemyAnimator.ResetTrigger("IsHitting");
+        enemyAnimator.ResetTrigger("IsHurting");
+
 
         switch (state)
         {
@@ -387,6 +383,10 @@ public class BattleManager : MonoBehaviour
     {
         playerState = neoState;
         PlayPlayerAnimation(neoState);
+    }
+    void LoadGameOverScene()
+    {
+        SceneManager.LoadScene("GameOver"); // make sure this matches your scene name exactly
     }
 }
 
